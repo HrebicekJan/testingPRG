@@ -1,6 +1,7 @@
 <?php
 
 // test funkčnosti //
-echo "hello world"
+echo "hello world";
+echo "funguje to?";
 
 ?>
