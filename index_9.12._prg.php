@@ -42,12 +42,11 @@ class zaci{
     }
 }
 
+//call
 $classroom = new classroom(4, "Seggy", 25);
 $classroom->identify();
 $zaci = new zaci("Pavel", "Wisman", "Hardware");
 $zaci->identify()
-
-
 
 
 ?>
