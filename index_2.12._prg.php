@@ -11,6 +11,7 @@ class Cat{
             echo "Nelze zadat negativní věk!";
             $age = 0;
         }
+        $this->age = $age;
     }
 
     public function identifikuj(){
@@ -24,9 +25,7 @@ class Cat{
 
 //instance objektu
 
-$jorje = new Cat();
-$jorje->age = 11;
-$jorje->name = "Jorje";
-$jorje->identify();
+$jorje = new Cat("Jorje", 11);
+$jorje->identifikuj();
 
 ?>
