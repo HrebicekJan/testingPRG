@@ -1,16 +1,21 @@
 <?php
 
-include "classroom.php";
-include "student.php";
+include_once("Person.php");
+include_once("Student.php");
+include_once("Teacher.php");
+include_once("Classroom.php");
 
-// vytvoření třídy
-$classroom = new Classroom(4, "Seggy");
+// učitel
+$teacher = new Teacher("Seggy", "Seggytý", "IT");
 
-// vytvoření žáků
-$student1 = new Student("Pavel", "Wisman", "Hardware");
+// třída
+$classroom = new Classroom(4, $teacher);
+
+// studenti
+$student1 = new Student("Wavel", "Pisman", "Hardware");
 $student2 = new Student("Jan", "Novák", "Matematika");
 
-// zápis žáků do třídy (zanoření objektu do objektu)
+// zápis studentů
 $classroom->zapisStudenta($student1);
 $classroom->zapisStudenta($student2);
 
