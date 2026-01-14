@@ -1,10 +1,12 @@
 <?php
-    // MySQL //
+// MySQL
 $host = 'localhost';
 $db   = 'SPRG';
 $user = 'root';
 $pass = '';
 $charset = 'utf8mb4';
+
+require 'User.php';
 
 $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
 $options = [
@@ -14,27 +16,15 @@ $options = [
 ];
 
 try {
-    // Připojení MySQL pomocí PDO
     $pdo = new PDO($dsn, $user, $pass, $options);
 } catch (PDOException $e) {
     echo "Chyba připojení: " . htmlspecialchars($e->getMessage());
     exit;
 }
 
-// query
-$sql = "SELECT id, name, email, created_at FROM users ORDER BY id ASC";
+// ORM: načteme všechny uživatele
+$rows = User::findAll($pdo);
 
-try {
-    $stmt = $pdo->query($sql); 
-} catch (PDOException $e) {
-    echo "Chyba dotazu: " . htmlspecialchars($e->getMessage());
-    exit;
-}
-
-// fetchAll
-$rows = $stmt->fetchAll(PDO::FETCH_OBJ);
-
-// HTML
 ?>
 <!doctype html>
 <html lang="cs">
