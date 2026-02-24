@@ -1,0 +1,17 @@
+{
+    "name": "janhr/moje",
+    "autoload": {
+        "psr-4": {
+            "Janhr\\Moje\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "HrebicekJan",
+            "email": "jan.hrebicek@educanet.cz"
+        }
+    ],
+    "require": {
+        "filp/whoops": "^2.18"
+    }
+}
