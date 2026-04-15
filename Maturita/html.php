@@ -102,7 +102,81 @@
 // Vytvořte jednoduchou HTML stránku s formulářem pro zadání jména a e-mailu
 // Po odeslání formuláře vypište zadané údaje na stránku
 // Formulář vycentrujte na stránce a odělte vstupy tak aby vizuálně nesplívaly.
+?>
 
+<?php
+$name = "";
+$email = "";
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $name = $_POST["name"];
+    $email = $_POST["email"];
+}
+?>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Formulář</title>
+    <style>
+        body {
+            font-family: Arial;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            border: 1px solid #ddd;
+            padding: 20px;
+            border-radius: 8px;
+            width: 300px;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin: 8px 0;
+        }
+
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        .result {
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Kontaktní formulář</h2>
+    <form method="POST">
+        <input type="text" name="name" placeholder="Jméno" required>
+        <input type="email" name="email" placeholder="E-mail" required>
+        <input type="submit" value="Odeslat">
+    </form>
+
+    <?php if ($name && $email): ?>
+        <div class="result">
+            <p><strong>Jméno:</strong> <?= htmlspecialchars($name) ?></p>
+            <p><strong>E-mail:</strong> <?= htmlspecialchars($email) ?></p>
+        </div>
+    <?php endif; ?>
+</div>
+
+</body>
+</html>
 
 /// Příklad 2. ///
 // Sestavte layout pro jednoduchou webovou stránku
@@ -113,11 +187,172 @@
 // Všechny prvky budou mít padding a margin pro lepší vzhled
 // Použijte Flexbox pro rozložení prvků podle potřeby
 
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Layout stránky</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial;
+        }
+
+        header {
+            background: #4CAF50;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        nav {
+            display: flex;
+            background: #333;
+        }
+
+        nav a {
+            flex: 1;
+            padding: 15px;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+        }
+
+        nav a:hover {
+            background: #555;
+        }
+
+        .content {
+            display: flex;
+            padding: 20px;
+            gap: 20px;
+        }
+
+        .image {
+            flex: 3;
+        }
+
+        .image img {
+            width: 100%;
+        }
+
+        .text {
+            flex: 7;
+        }
+
+        footer {
+            background: #222;
+            color: white;
+            text-align: center;
+            padding: 15px;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>Moje stránka</h1>
+</header>
+
+<nav>
+    <a href="#">Domů</a>
+    <a href="#">O nás</a>
+    <a href="#">Služby</a>
+    <a href="#">Kontakt</a>
+</nav>
+
+<div class="content">
+    <div class="image">
+        <img src="https://via.placeholder.com/300" alt="Obrázek">
+    </div>
+    <div class="text">
+        <h2>Hlavní obsah</h2>
+        <p>
+            Toto je ukázkový text hlavního obsahu stránky.
+            Flexbox zajišťuje rozložení 30% obrázek a 70% text.
+        </p>
+    </div>
+</div>
+
+<footer>
+    <p>&copy; 2026 Moje stránka</p>
+</footer>
+
+</body>
+</html>
 
 /// Příklad 3. ///
 // Na stránce budou poznámky z literatury
 // Nastyluje rozbalovací summarizaci pro každou knihu s listem důležitých informací a shrnutím knihy
 // Všechny knihy budou mít stejný formát a budou se rozbalovat po kliknutí (<details> a <summary>)
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Literatura</title>
+    <style>
+        body {
+            font-family: Arial;
+            margin: 20px;
+        }
+
+        details {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+
+        summary {
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        ul {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+<h1>Poznámky z literatury</h1>
+
+<details>
+    <summary>Romeo a Julie</summary>
+    <ul>
+        <li><strong>Autor:</strong> William Shakespeare</li>
+        <li><strong>Žánr:</strong> Drama</li>
+        <li><strong>Rok vydání:</strong> 1597</li>
+        <li><strong>Postavy:</strong> Romeo, Julie</li>
+        <li><strong>Témata:</strong> Láska, nenávist, osud</li>
+        <li><strong>Citát:</strong> "Láska je jako víno..."</li>
+    </ul>
+
+    <p>
+        Romeo a Julie je tragédie o dvou mladých milencích,
+        jejichž láska končí tragicky kvůli sporům rodin.
+    </p>
+</details>
+
+<details>
+    <summary>Malý princ</summary>
+    <ul>
+        <li><strong>Autor:</strong> Antoine de Saint-Exupéry</li>
+        <li><strong>Žánr:</strong> Pohádka</li>
+        <li><strong>Rok vydání:</strong> 1943</li>
+        <li><strong>Témata:</strong> Přátelství, láska, smysl života</li>
+    </ul>
+
+    <p>
+        Příběh o malém chlapci z jiné planety, který poznává svět a lidské hodnoty.
+    </p>
+</details>
+
+</body>
+</html>
 
 // Příklad Obsahu:
 // Romeo a Julie

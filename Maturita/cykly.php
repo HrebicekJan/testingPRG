@@ -8,7 +8,7 @@
 // Faktoriál čísla n je součin všech celých čísel od 1 do n.
 // Např.: 5! = 5 * 4 * 3 * 2 * 1 = 120
 
-$vstup = 5;
+/* $vstup = 5;
 function faktorial($n) {
     if ($n <= 1) {
         return 1;
@@ -27,7 +27,7 @@ function faktorialCyklem($n) {
     }
     return $faktorial;
 }
-echo "Faktorial čísla $vstup je: " . faktorialCyklem($vstup) . "<br>";
+echo "Faktorial čísla $vstup je: " . faktorialCyklem($vstup) . "<br>"; */
 
 
 
@@ -35,22 +35,41 @@ echo "Faktorial čísla $vstup je: " . faktorialCyklem($vstup) . "<br>";
 // Vypočítejte součet čísel od 1 do N pomocí cyklu
 // Např.: 5 -> 1 + 2 + 3 + 4 + 5 = 15
 
+$N = 10;
+$x = 0;
+
+for ($i = 0; $i <= $N; $i++){
+    $x = $x + $i;
+    }
+echo $x . "\n";
 
 
 /// Příklad 2. ///
 // Najděte největší číslo v poli pomocí cyklu
 // Např.: [1, 2, 3, 4, 5] -> 5
-
+$promenna = 0;
+$cisla = array(1, 2, 5, 3, 4);
+for ($i = 0; $i < count($cisla); $i++) {
+    if ($promenna < $cisla[$i]) {
+        $promenna = $cisla[$i];
+    }
+}
+echo $promenna . "\n";
 
 /// Příklad 3. ///
 // Obrácení řetězce pomocí cyklu
 // Např.: "ahoj" -> "joha"
 
-
+$str = "ahojda";
+$arrayed = str_split($str);
+for ($i = count($arrayed)-1; $i >= 0; $i--){
+    echo $arrayed[$i];
+}
 
 /// Příklad 4. ///
 // Nahraďte funkci explode pomocí vlastní funkce, která rozdělí řetězec na pole podle zadaného oddělovače.
 // Např.: "ahoj,jak,se,máš" -> ["ahoj", "jak", "se", "máš"]
+
 
 
 /// Příklad 5. ///
@@ -64,17 +83,29 @@ echo "Faktorial čísla $vstup je: " . faktorialCyklem($vstup) . "<br>";
 4 8 12 16 ...
 ...
 */
+echo "\n";
 
+$num = 15;
+for ($i = $num; $i <= 10*$num; $i = $i + $num) {
+    echo $i . "\n";
+}
 
 /// Příklad 6. ///
 // Program, bude brát číslo a vypisovat jeho dělitele
 // Algoritmus postupně projde čísla od 1 do N a pokud je dělitel, vypíše ho
 // Např.: Číslo 12 dělí čísla: 1, 2, 3, 4, 6, 12
 
+$numb = 18;
+for ($i = 1; $i <= $numb; $i++) {
+    if ($numb % $i == 0) {
+        echo "Číslo " . $numb . " je dělitelné číslem " . $i . "\n";
+    }
+}
 
 /// Příklad 7. ///
 // Vytvořte funkci, která najde nejmenší číslo v poli pomocí cyklu a to číslo odstraní.
 // Např.: [1, 2, 3, 4, 5] -> [2, 3, 4, 5]
+
 
 
 /// Příklad 8. ///

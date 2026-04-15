@@ -42,6 +42,31 @@ $mojeAuto->vypsatInfo();
 
 /// Příklad 1. ///
 
+class Film {
+    private $nazev;
+    private $rok;
+    private $hodnoceni;
+
+    function __construct($nazev, $rok, $hodnoceni) {
+        $this->nazev = $nazev;
+        $this->rok = $rok;
+        $this->hodnoceni = $hodnoceni;
+    }
+
+    public function zmenitHodnoceni($noveHodnoceni) {
+        $this->hodnoceni = $noveHodnoceni;
+    }
+
+    public function vypsatInfo() {
+        echo "Film: $this->nazev <br>";
+        echo "Rok: $this->rok <br>";
+        echo "Hodnocení: $this->hodnoceni % <br>";
+    }
+}
+
+$film = new Film("Inception", 2010, 90);
+$film->vypsatInfo();
+
 // Vytvořte třídu "Film" s vlastnostmi "název", "rok" a "hodnocení" (použijte zapouzdření a dodžujte zásady OOP)
 // Vytvořte metodu "zmenitHodnoceni", která změní hodnocení filmu
 // Vytvořte metodu "vypsatInfo", která vypíše informace o filmu
@@ -51,6 +76,36 @@ $mojeAuto->vypsatInfo();
 
 /// Příklad 2. ///
 
+class Student {
+    private $jmeno;
+    private $prijmeni;
+    private $znamky = [];
+
+    function __construct($jmeno, $prijmeni) {
+        $this->jmeno = $jmeno;
+        $this->prijmeni = $prijmeni;
+    }
+
+    public function pridatZnamku($znamka) {
+        $this->znamky[] = $znamka;
+    }
+
+    public function vypocitatPrumer() {
+        if (count($this->znamky) == 0) return 0;
+
+        $soucet = array_sum($this->znamky);
+        $prumer = $soucet / count($this->znamky);
+
+        echo "Průměr studenta $this->jmeno $this->prijmeni je: $prumer";
+    }
+}
+
+$student = new Student("Jan", "Novák");
+$student->pridatZnamku(1);
+$student->pridatZnamku(2);
+$student->pridatZnamku(3);
+$student->vypocitatPrumer();
+
 // Vytvořte třídu "Student" s vlastnostmi "jméno", "příjmení" a "známky" (použijte zapouzdření a dodžujte zásady OOP)
 // Vytvořte metodu "pridatZnamku", která přidá známku do pole známek
 // Vytvořte metodu "vypocitatPrumer", která vypočítá průměr známek
@@ -59,6 +114,29 @@ $mojeAuto->vypsatInfo();
 
 
 /// Příklad 3. ///
+
+class Obdelnik {
+    private $sirka;
+    private $vyska;
+
+    function __construct($sirka, $vyska) {
+        $this->sirka = $sirka;
+        $this->vyska = $vyska;
+    }
+
+    public function vypocitatObsah() {
+        return $this->sirka * $this->vyska;
+    }
+
+    public function vypocitatObvod() {
+        return 2 * ($this->sirka + $this->vyska);
+    }
+}
+
+$obdelnik = new Obdelnik(5, 3);
+
+echo "Obsah: " . $obdelnik->vypocitatObsah() . "<br>";
+echo "Obvod: " . $obdelnik->vypocitatObvod();
 
 // Vytvořte třídu "Obdelník" s vlastnostmi "šířka" a "výška" (použijte zapouzdření a dodžujte zásady OOP)
 // Vytvořte metodu "vypocitatObsah", která vypočítá obsah obdélníku
@@ -72,6 +150,19 @@ $mojeAuto->vypsatInfo();
 // Vytvořte statickou metodu "odecti", která odečte dvě čísla
 // Zavolejte obě metody bez vytváření instance třídy
 
+class Kalkulacka {
+
+    public static function secti($a, $b) {
+        return $a + $b;
+    }
+
+    public static function odecti($a, $b) {
+        return $a - $b;
+    }
+}
+
+echo Kalkulacka::secti(5, 3) . "<br>";
+echo Kalkulacka::odecti(10, 4);
 
 // Příklad 5. ///
 // Třída "Ukol" bude reprezentovat připomínku z úkolovníku, který umožní pracovat s daty a statusem.
@@ -84,21 +175,49 @@ $mojeAuto->vypsatInfo();
 // - nastavitVyreseno() - nastaví status na true
 
 class Ukol {
-    // Vlastnosti a metody zde...
+    private $datum;
+    private $popis;
+    private $vyreseno = false;
+
+    function __construct($datum, $popis) {
+        $this->datum = new DateTime($datum);
+        $this->popis = $popis;
+    }
+
+    public function kolikCasuZbyva() {
+        $dnes = new DateTime();
+        $rozdil = $dnes->diff($this->datum);
+        return (int)$rozdil->format("%r%a");
+    }
+
+    public function vypisStatus() {
+        if ($this->vyreseno) {
+            echo "Vyřešeno - $this->popis <br>";
+        } else {
+            echo "Zbývá " . $this->kolikCasuZbyva() . " dní do vyřešení úkolu - $this->popis <br>";
+        }
+    }
+
+    public function vratDatumUdalosti() {
+        return $this->datum;
+    }
+
+    public function nastavitDatum($den, $mesic, $rok) {
+        $this->datum->setDate($rok, $mesic, $den);
+    }
+
+    public function nastavitVyreseno() {
+        $this->vyreseno = true;
+    }
+
+    public function jeVyreseno() {
+        return $this->vyreseno;
+    }
+
+    public function getPopis() {
+        return $this->popis;
+    }
 }
-
-/// Příklad použití (aktuální datum např: 2025-01-01): ///
-$r1 = new Ukol("2025-01-06", "Zkouška z matematiky");
-$r2 = new Ukol("2025-01-29", "Posekat zahradu");
-$r3 = new Ukol("2025-01-20", "Sestavit plán výletu");
-    
-$r1->vypisStatus(); // -> "5 dní do vyřešení úkolu - Zkouška z matematiky"
-
-$r2->nastavitDatum(22, 1, 2025); // -> nastaví datum na 2025-01-22
-echo $r2->kolikCasuZbyva(); // -> 21
-$r2->vypisStatus(); // -> "Zbývá 21 dní do vyřešení úkolu - Posekat zahradu"
-$r2->nastavitVyreseno(); 
-$r2->vypisStatus(); // -> "Vyřešeno - Posekat zahradu"
 
 
 // Příklad 6. ~ navazující na Příklad 5. ///
@@ -109,26 +228,27 @@ $r2->vypisStatus(); // -> "Vyřešeno - Posekat zahradu"
 // - vypsatUkoly($vyresene) - vypíše všechny úkoly, které jsou vyřešené (true) nebo nevyřešené (false) dle parametru
 
 class Ukolovnik {
-    // Vlastnosti a metody zde...
+    private $ukoly = [];
+
+    public function pridatUkol($ukol) {
+        $this->ukoly[] = $ukol;
+    }
+
+    public function odstranitUkol($index) {
+        if (isset($this->ukoly[$index])) {
+            unset($this->ukoly[$index]);
+            $this->ukoly = array_values($this->ukoly);
+        }
+    }
+
+    public function vypsatUkoly($vyresene) {
+        foreach ($this->ukoly as $ukol) {
+            if ($ukol->jeVyreseno() == $vyresene) {
+                $ukol->vypisStatus();
+            }
+        }
+    }
 }
-
-/// Příklad použití: ///
-$ukolovnik = new Ukolovnik();
-$ukolovnik->pridatUkol($r1);
-$ukolovnik->pridatUkol($r2);
-$ukolovnik->pridatUkol($r3);
-
-// Vypíše všechny úkoly
-$ukolovnik->vypsatUkoly(false);
-
-$r1->nastavitVyreseno();
-// Vypíše pouze vyřešené úkoly (tedy ukol 1)
-$ukolovnik->vypsatUkoly(true);
-
-$ukolovnik->odstranitUkol(1); // Odstraní druhý úkol (index 1)
-
-
-
 
 /// Příklad 7. ///
 // Příklad základní dědičnosti
@@ -137,3 +257,37 @@ $ukolovnik->odstranitUkol(1); // Odstraní druhý úkol (index 1)
 // Vytvořte třídu "Manazer", která dědí z třídy "Zamestnanec" a přidá navíc vlastnost "oddělení"
 // Vytvořte metodu "vypisInfo", která vypíše informace o manažerovi
 // Vytvořte instanci třídy "Manazer" a zavolejte metodu "vypisInfo"
+
+class Zamestnanec {
+    protected $jmeno;
+    protected $prijmeni;
+    protected $plat;
+
+    function __construct($jmeno, $prijmeni, $plat) {
+        $this->jmeno = $jmeno;
+        $this->prijmeni = $prijmeni;
+        $this->plat = $plat;
+    }
+
+    public function vypisInfo() {
+        echo "$this->jmeno $this->prijmeni - Plat: $this->plat Kč <br>";
+    }
+}
+
+class Manazer extends Zamestnanec {
+    private $oddeleni;
+
+    function __construct($jmeno, $prijmeni, $plat, $oddeleni) {
+        parent::__construct($jmeno, $prijmeni, $plat);
+        $this->oddeleni = $oddeleni;
+    }
+
+    public function vypisInfo() {
+        echo "Manažer: $this->jmeno $this->prijmeni <br>";
+        echo "Oddělení: $this->oddeleni <br>";
+        echo "Plat: $this->plat Kč <br>";
+    }
+}
+
+$manazer = new Manazer("Petr", "Svoboda", 50000, "IT");
+$manazer->vypisInfo();
